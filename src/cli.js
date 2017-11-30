@@ -14,6 +14,11 @@ var options = require('yargs')
     describe: 'If no repository given, generate HTML from existing offline cache',
     boolean: true
   })
+  .option('buildnumber', {
+    alias: 'b',
+    describe: 'To pass current build number',
+    default: '007'
+  })
   .option('no-static', {
     alias: 'S',
     describe: "Don't generate static files for HTML format",
