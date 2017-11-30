@@ -17,15 +17,15 @@ This is a command line application, that fetches the GitHub Issue/s you specify 
 - Run `node src/cli.js SrikanthIO/offline-issues` command to pull the github issues.
 - `node src/cli.js --help`
 
-    **--destination, -d  Change destination of the generated files**
-    **--html, -h         If no repository given, generate HTML from existing offline
-                       cache                                             [boolean]**
-    **--no-static, -S    Don't generate static files for HTML format       [boolean]**
-    **--state, -s        Filter by issue state
-                              [choices: "open", "closed", "all"] [default: "open"]**
-    **--header, -r       Release notes header name        [default: "Release Notes"]**
-    **--pagesize, -p     No of issues to pull from github. It will pull 100 issues
-                       per page                                     [default: "2"]**
-    **--help             Show help                                         [boolean]**
+-   _--destination, -d  Change destination of the generated files_
+-   _--html, -h         If no repository given, generate HTML from existing offline
+                       cache                                             [boolean]_
+-   _--no-static, -S    Don't generate static files for HTML format       [boolean]_
+-   _--state, -s        Filter by issue state
+                              [choices: "open", "closed", "all"] [default: "open"]_
+-   _--header, -r       Release notes header name        [default: "Release Notes"]_
+-    _--pagesize, -p     No of issues to pull from github. It will pull 100 issues
+                       per page                                     [default: "2"]_
+-    _--help             Show help                                         [boolean]_
 
 - Right now it is getting all closed issues by default.
