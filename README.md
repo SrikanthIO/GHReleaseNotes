@@ -7,6 +7,7 @@ _Get your GitHub Issues offline! In HTML format._
 This is a command line application, that fetches the GitHub Issue/s you specify and writes them to file on your computer in HTML format.
 
 **This will cap issues at the first 300. You can change this limit by passing maxPageSize arugment** 
+
 **node src/cli.js -p 4 SrikanthIO/offline-issues**
 
 ## Build / Develop Locally
