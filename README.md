@@ -6,78 +6,7 @@ _Get your GitHub Issues offline! In HTML format._
 
 This is a command line application, that fetches the GitHub Issue/s you specify and writes them to file on your computer in HTML format.
 
-**This will cap issues at the first 300. You can change this limit by controlling the maxPageSize variable in index.js ** 
-
-![screenshot](screenshot.png)
-
-## To Use
-
-- Have [Node.js](http://nodejs.org/) installed on computer.
-- From your command line, install this module `npm install -g offline-issues`
-- Authorize it by running `offline-issues` and following the commands.
-- Use it to save Issues as `.md` and `.html`. Options in next section.
-
-### Command Line Interface (CLI)
-
-For one issue:
-
-```bash
-$ offline-issues USER/REPO#0
-```
-
-For all issues:
-
-```bash
-$ offline-issues USER/REPO
-```
-
-For multiple repositories or issues:
-
-```bash
-$ offline-issues USER/REPO USER/REPO#0
-```
-
-**Example:**
-
-```bash
-$ offline-issues jlord/offline-issues muan/github-gmail#4
-```
-
-The files are written to whichever directory you are currently in. You will see a `md` and `html` folder added, each of which contains the issues you requested.
-
-## Options
-
-To just generate HTML files from existing offline cache:
-
-```bash
-$ offline-issues -h
-$ offline-issues --html
-```
-
-To skip generating static files for HTML:
-
-```bash
-$ offline-issues -S USER/REPO
-$ offline-issues --no-static USER/REPO
-```
-
-To save generated files in different location:
-
-```bash
-$ offline-issues -d DIRECTORY USER/REPO
-$ offline-issues --destination DIRECTORY USER/REPO
-```
-
-To filter by issue state:
-
-```bash
-$ offline-issues -s all USER/REPO
-$ offline-issues --state all USER/REPO
-```
-
-This option accepts either ```open```, ```closed``` or ```all```. (Default: ```open```)
-Note that the filter won't be applied when issue number is specified, like ```muan/github-gmail#4```.
-
+**This will cap issues at the first 300. You can change this limit by controlling the maxPageSize variable in src/index.js** 
 
 ## Build / Develop Locally
 
