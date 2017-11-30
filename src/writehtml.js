@@ -47,7 +47,7 @@ module.exports = function writehtml (options, cb) {
   if(options.buildnumber) {
     _buildNumber = options.buildnumber;
   }
-fs.writeFile(_fileName,"<div style='text-align:center'><h1>"+_fileHeader+"</h1></div><div style='text-align:center'><h4>"+_buildNumber+"</h4></div>",function(result){}); 
+fs.writeFile(_fileName,"<div style='text-align:center'><h1>"+_fileHeader+"</h1></div><div style='text-align:center'><h4>Current Build #"+_buildNumber+"</h4></div>",function(result){}); 
   issues.forEach(function (issue) {
     issue = parseBody(issue)
     var filename = repoDetails(issue.url)
