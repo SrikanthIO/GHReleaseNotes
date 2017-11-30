@@ -2,11 +2,11 @@
 
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
-_Get your GitHub Issues offline! In Markdown and HTML._
+_Get your GitHub Issues offline! In HTML format._
 
-This is a command line application, using [Node.js](http://nodejs.org/), that fetches the GitHub Issue/s you specify and writes them to files on your computer in both HTML and markdown formats. This way you can view them without an internet connection.
+This is a command line application, that fetches the GitHub Issue/s you specify and writes them to file on your computer in HTML format.
 
-**This will cap issues at the first 250.**
+**This will cap issues at the first 300. You can change this limit by controlling the maxPageSize variable in index.js ** 
 
 ![screenshot](screenshot.png)
 
