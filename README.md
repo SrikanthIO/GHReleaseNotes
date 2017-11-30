@@ -22,9 +22,6 @@ This is a command line application, that fetches the GitHub Issue/s you specify 
 -   _--destination, -d  Change destination of the generated files_
 -   _--html, -h         If no repository given, generate HTML from existing offline
                        cache                                             [boolean]_
--   _--no-static, -S    Don't generate static files for HTML format       [boolean]_
--   _--state, -s        Filter by issue state
-                              [choices: "open", "closed", "all"] [default: "open"]_
 -   _--header, -r       Release notes header name        [default: "Release Notes"]_
 -    _--pagesize, -p     No of issues to pull from github. It will pull 100 issues
                        per page                                     [default: "2"]_
