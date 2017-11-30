@@ -10,21 +10,10 @@ This is a command line application, that fetches the GitHub Issue/s you specify 
 
 ## Build / Develop Locally
 
-- Clone this repository: `git clone https://github.com/jlord/offline-issues.git`
+- Clone this repository: `git@github.com:SrikanthIO/offline-issues.git`
 - Go inside this project: `cd offline-issues`
 - Install dependencies: `npm install`
 - Link this local version to your global `npm link` (or `sudo npm link`)
 - If you have trouble with this or don't want to override the published version (this one) you can run it through the path to the main file: `<path-to-clone>/src/cli.js OPTIONS`
 - On Ubuntu, use `nodejs <path-to-clone>/src/cli.js` (or `nodejs $(which offline-issues)`) to start the CLI
-
----
-
-## Future times
-
-Currently working at MVP level -- it gives you the issues you specify. But I want to add (or recieve Pull Requests!) to it:
-
-- More command line options like getting 'all' or 'closed' or 'open' or by 'author' or 'mention'.
-- Directory/Index of files you have.
-- Tests.
-- Spin up server.
-- Sync up the issues you currently have at a later date.
+- Right now it is getting all closed issues by default.
