@@ -12,8 +12,11 @@ var headers = {'user-agent': 'offline-issues module'}
 module.exports = function (token, options, cb) {
   var issueData = []
   var pagenum = 1
+  var maxPageSize = 1;
   var allIssues = []
-
+  if(options.pagesize) {
+    maxPageSize = options.pagesize;
+  }
   headers['Authorization'] = 'token ' + token.token
   if (options._.length === 0 && options.html) {
     return writehtml(options, cb)
@@ -52,16 +55,17 @@ module.exports = function (token, options, cb) {
   }
 
   function getIssues (repo, cb) {
+//    console.log("****** Getting Issues ********");
     if (repo.issue === 'all') return theRequestLoop(repo, cb)
-    var url = base + '/repos/' + repo.user + '/' + repo.name + '/issues/' + repo.issue
-    request(url, { json: true, headers: headers }, function (err, resp, body) {
-      if (err) return cb(err, 'Error in request for issue.')
-      loadIssue(body, repo, cb)
-    })
+    // var url = base + '/repos/' + repo.user + '/' + repo.name + '/issues/' + repo.issue
+    // request(url, { json: true, headers: headers }, function (err, resp, body) {
+    //   if (err) return cb(err, 'Error in request for issue.')
+    //   loadIssue(body, repo, cb)
+    // })
   }
 
   function theRequestLoop (repo, cb) {
-    var query = '/issues?state=' + repo.state + '&page='
+    var query = '/issues?state=closed&page='
     var limit = '&per_page=100'
     var url = base + '/repos/' + repo.user + '/' + repo.name + query + pagenum + limit
     request(url, { json: true, headers: headers }, function (err, resp, body) {
@@ -80,18 +84,45 @@ module.exports = function (token, options, cb) {
         body.forEach(function (issue) {
           return allIssues.push(issue)
         })
-        pagenum++
-        getIssues(repo, cb)
+        pagenum++;
+        if(pagenum <= maxPageSize) {
+          getIssues(repo, cb);
+        } else {
+          var functionsToDo = allIssues.map(function (issue) {
+          return function (cb) {
+            loadIssue(issue, repo, cb)
+          }
+        })
+        runParallel(functionsToDo, cb)
+        return
+        }
       }
     })
   }
 
   function loadIssue (body, repo, cb) {
     var issue = {}
-
+  
+   
+  //  console.log(body);
     issue.id = body.id
     issue.url = body.html_url
-    issue.title = body.title
+    if(body.labels && body.labels.length > 0) {
+        for(var k = 0 ; k < body.labels.length; k++ ) {
+          var label = body.labels[k];
+          if(label.name) {
+            if(label.name === 'enhancement' || label.name === 'major feature') {
+              issue.label = 'enhancement';
+              break;
+            }else if(label.name == 'bug') {
+              issue.label = 'bug';
+              break;
+            } 
+          } 
+      }
+    };
+    //issue.labels = body.labels;
+    issue.title = "#" + body.number + " "+ body.title
     issue.created_by = body.user.login || body.head.user.login
     issue.created_at = new Date(body.created_at).toLocaleDateString()
     issue.body = body.body
@@ -101,10 +132,13 @@ module.exports = function (token, options, cb) {
     issue.milestone = body.milestone ? body.milestone.title : null
 
     if (repo.issue === 'all') {
-      issue.quicklink = repo.full + '#' + body.html_url.split('/').pop()
+      issue.quicklink =  '#' + body.html_url.split('/').pop()
     } else issue.quicklink = repo.full
-
-    getComments(issue, repo, cb)
+    if(!body.pull_request) {
+      issueData.push(issue);
+    }
+    cb()
+   // getComments(issue, repo, cb)
   }
 
   function getComments (issue, repo, cb) {
@@ -118,9 +152,13 @@ module.exports = function (token, options, cb) {
       if (err) return cb(err, 'Error in request for comments.')
 
       issue.comments = body
+      if(issue && issue.comments && issue.comments.length > 0) {
+        console.log(issue);
+        console.log(issue.comments);
       issue.comments.forEach(function (comment) {
         comment.created_at = new Date(comment.created_at).toLocaleDateString()
       })
+    }
       issueData.push(issue)
       cb()
     })
@@ -129,18 +167,18 @@ module.exports = function (token, options, cb) {
   function writeData (options, cb) {
     var data = JSON.stringify(issueData, null, ' ')
     var count = JSON.parse(data).length
-
-    if (count > 250) {
-      console.log('Only processing the first 250 issues.')
-      var limit = 250
-      var excess = count - limit
-      var newData = JSON.parse(data).splice(excess, 250)
-      data = JSON.stringify(newData)
-    }
+    console.log("***** Generating release notes for last "+count +" isseus");
+    // if (count > 250) {
+    //   console.log('Only processing the first 250 issues.')
+    //   var limit = 250
+    //   var excess = count - limit
+    //   var newData = JSON.parse(data).splice(0, 250)
+    //   data = JSON.stringify(newData)
+    // }
 
     fs.writeFile('comments.json', data, function (err) {
       if (err) return cb(err, 'Error in writing data file.')
-      writemarkdown(options, cb)
+      //writemarkdown(options, cb)
       writehtml(options, cb)
     })
   }

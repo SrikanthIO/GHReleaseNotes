@@ -6,20 +6,35 @@
     <script type="text/javascript" src="lib/jquery.js"></script>
     <script type="text/javascript" src="lib/jquery.emoji.js"></script>
     <title>{{title}}</title>
+    <style>
+    .badge.bug { background: #c00; }
+    .badge.enhancement { background: #1d76db; }
+    .container {
+      padding: 1px !important;
+    }
+   p > img {
+    max-width: 600px;
+   }  
+    </style>
   </head>
   <body>
+<!--<div>  <h2> CloudIO 2.4 Release Notes </div> -->
     <div class="container">
       <header>
         <p>
-          <span class="badge {{state}}">{{state}}</span>
-          <span class="url"><a href="{{url}}">{{quicklink}}</a></span>
+          {{# if label}}
+          <span class="badge {{label}}">
+            {{label}}
+          </span>
+          {{/if}}
+          <!-- <span class="url"><a href="{{url}}">{{quicklink}}</a></span> -->
         </p>
         <h1>{{title}}</h1>
       </header>
       <div class="comments">
         <div class="comment">
           <div class="meta">
-            <a class="person" href="https://github.com/{{created_by}}">{{created_by}}</a>
+            <a class="person" href="#">{{created_by}}</a>
             <time>{{created_at}}</time>
           </div>
           <div class="body">

@@ -37,14 +37,20 @@ module.exports = function writehtml (options, cb) {
   }
 
   var issues = fs.readFileSync('comments.json')
-  issues = JSON.parse(issues)
+  issues = JSON.parse(issues);
+  var _fileName = dest + '/issues.html';
+  var _fileHeader = "Release Notes";
+  if(options.header) {
+    _fileHeader = options.header;
+  }
+fs.writeFile(_fileName,"<div style='text-align:center'><h1>"+_fileHeader+"</h1></div>",function(result){}); 
   issues.forEach(function (issue) {
     issue = parseBody(issue)
     var filename = repoDetails(issue.url)
     var source = fs.readFileSync(path.join(__dirname, '/templates/html.hbs'))
     var template = handlebars.compile(source.toString())
     var result = template(issue)
-    fs.writeFile(dest + '/' + filename + '.html', result, function (err) {
+    fs.appendFile(_fileName, result, function (err) {
       if (err) return cb(err, 'Error writing HTML file.')
     })
   })
@@ -52,7 +58,7 @@ module.exports = function writehtml (options, cb) {
 }
 
 function repoDetails (issue) {
-  var a = issue.split('/')
+  var a = issue.split('/')  
   var filename = a[3] + '-' + a[4] + '-' + a[6]
   return filename
 }
@@ -63,9 +69,11 @@ function repoDetails (issue) {
 function parseBody (issue) {
   if (issue.body === null) issue.body = ''
   else issue.body = marked(issue.body)
-  issue.comments = issue.comments.map(function (issue) {
-    issue.body = marked(issue.body)
-    return issue
-  })
+  // if(issue && issue.comments && issue.comments.length > 0) {  
+  //   issue.comments = issue.comments.map(function (issue) {
+  //     issue.body = marked(issue.body)
+  //     return issue
+  //   })
+  // }
   return issue
 }

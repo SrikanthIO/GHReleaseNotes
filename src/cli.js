@@ -25,6 +25,16 @@ var options = require('yargs')
     choices: ['open', 'closed', 'all'],
     default: 'open'
   })
+  .option('header', {
+    alias: 'r',
+    describe: 'Release notes header name',
+    default: 'Release Notes'
+  })
+  .option('pagesize', {
+    alias: 'p',
+    describe: 'No of issues to pull from github. It will pull 100 issues per page ',
+    default: '2'
+  })
   .help('help')
   .argv
 
