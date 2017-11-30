@@ -14,6 +14,5 @@ This is a command line application, that fetches the GitHub Issue/s you specify 
 - Go inside this project: `cd offline-issues`
 - Install dependencies: `npm install`
 - Link this local version to your global `npm link` (or `sudo npm link`)
-- If you have trouble with this or don't want to override the published version (this one) you can run it through the path to the main file: `<path-to-clone>/src/cli.js OPTIONS`
-- On Ubuntu, use `nodejs <path-to-clone>/src/cli.js` (or `nodejs $(which offline-issues)`) to start the CLI
+- Run node src/cli.js SrikanthIO/offline-issues command to pull the github issues.
 - Right now it is getting all closed issues by default.
