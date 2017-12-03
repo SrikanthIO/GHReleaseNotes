@@ -23,6 +23,4 @@ This is a command line application, that fetches the GitHub Issue/s you specify 
 -   _--header, -r       Release notes header name        [default: "Release Notes"]_
 -    _--pagesize, -p     No of issues to pull from github. It will pull 100 issues
                        per page                                     [default: "3"]_
--    _--help             Show help                                         [boolean]_
-
 - Right now it is getting all closed issues by default.
