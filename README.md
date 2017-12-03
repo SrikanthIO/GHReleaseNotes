@@ -1,22 +1,20 @@
 # GHReleaseNotes
 
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
-
 _Get your GitHub Issues offline! In HTML format._
 
 This is a command line application, that fetches the GitHub Issue/s you specify and writes them into a file on your computer in HTML format.
 
 **This will cap issues at the first 300. You can change this limit by passing maxPageSize as command line argument** 
 
-**node src/cli.js -p 4 SrikanthIO/offline-issues**
+**node src/cli.js -p 4 SrikanthIO/GHReleaseNotes**
 
 ## Build / Develop Locally
 
 - Clone this repository: `git@github.com:SrikanthIO/GHReleaseNotes.git`
-- Go inside this project: `cd offline-issues`
+- Go inside this project: `cd GHReleaseNotes`
 - Install dependencies: `npm install`
 - Link this local version to your global `npm link` (or `sudo npm link`)
-- Run `node src/cli.js SrikanthIO/offline-issues` command to pull the github issues.
+- Run `node src/cli.js SrikanthIO/GHReleaseNotes` command to pull the github issues.
 - `node src/cli.js --help`
 
 -   _--destination, -d  Change destination of the generated files_
