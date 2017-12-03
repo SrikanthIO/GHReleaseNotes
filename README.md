@@ -12,7 +12,7 @@ This is a command line application, that fetches the GitHub Issue/s you specify 
 
 ## Build / Develop Locally
 
-- Clone this repository: `git@github.com:SrikanthIO/offline-issues.git`
+- Clone this repository: `git@github.com:SrikanthIO/GHReleaseNotes.git`
 - Go inside this project: `cd offline-issues`
 - Install dependencies: `npm install`
 - Link this local version to your global `npm link` (or `sudo npm link`)
