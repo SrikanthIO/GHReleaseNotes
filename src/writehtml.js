@@ -50,6 +50,11 @@ module.exports = function writehtml (options, cb) {
 fs.writeFile(_fileName,"<div style='text-align:center'><h1>"+_fileHeader+"</h1></div><div style='text-align:center'><h4>Current Build #"+_buildNumber+"</h4></div>",function(result){}); 
   issues.forEach(function (issue) {
     issue = parseBody(issue)
+    if(issue.label) {
+      if(issue.label === 'not include in release notes') {
+         return;
+      }
+    }
     var filename = repoDetails(issue.url)
     var source = fs.readFileSync(path.join(__dirname, '/templates/html.hbs'))
     var template = handlebars.compile(source.toString())

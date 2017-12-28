@@ -110,9 +110,6 @@ module.exports = function (token, options, cb) {
     if(body.labels && body.labels.length > 0) {
         for(var k = 0 ; k < body.labels.length; k++ ) {
           var label = body.labels[k];
-          if(label.name === 'not include in release notes') {
-              continue;
-          }
           if(label.name) {
             if(label.name === 'enhancement' || label.name === 'major feature') {
               issue.label = 'enhancement';
@@ -120,7 +117,10 @@ module.exports = function (token, options, cb) {
             }else if(label.name == 'bug') {
               issue.label = 'bug';
               break;
-            } 
+            } else if(label.name === 'not include in release notes') {
+               issue.label = 'not include in release notes';
+              break;
+            }
           } 
       }
     };
