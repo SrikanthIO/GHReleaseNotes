@@ -2,7 +2,7 @@
 
 _Get your GitHub Issues offline! In HTML format._
 
-This is a command line application, that fetches the GitHub Issue/s you specify and writes them into a file on your computer in HTML format.
+This is a command line application, that fetches the GitHub Issues you specify and writes them into a file on your computer in HTML format.
 
 **This will cap issues at the first 300. You can change this limit by passing maxPageSize as command line argument** 
 
